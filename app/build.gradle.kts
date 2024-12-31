@@ -9,6 +9,7 @@ plugins {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":database"))
+    implementation(project(":infra"))
 
     implementation("org.springframework:spring-context")
     implementation("org.springframework.boot:spring-boot-starter-validation")

@@ -6,3 +6,20 @@ A good Domain Service has three characteristics:
 1. The operation relates to a domain concept that is not a natural part of an Entity or a Value Object.
 2. The interface is defined in terms of other objects in the domain model
 3. The operation is stateless.
+
+
+## Exemplo de Uso
+
+Create a movie, send request HTTP `POST` for endpoint `/movies`:
+
+```bash
+curl -X POST http://localhost:8080/movies \
+-H "Content-Type: application/json" \
+-d '{
+  "name": "The Matrix",
+  "original_title": "The Matrix",
+  "release_year": "1999-03-31",
+  "synopsis": "A computer hacker learns about the true nature of reality and his role in the war against its controllers.",
+  "director": "Lana Wachowski, Lilly Wachowski",
+  "casts": ["Keanu Reeves", "Carrie-Anne Moss", "Laurence Fishburne"]
+}'

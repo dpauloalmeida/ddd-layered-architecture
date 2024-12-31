@@ -9,19 +9,23 @@ import java.util.*
 
 @Validated
 internal class MovieServiceImpl(
-    private val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository,
+    private val publisher: DomainEvent
 ): MovieService {
 
     override fun create(dto: MovieCreationDto): UUID {
-        val film = dto.toDomain()
-        movieRepository.save(film)
-        return film.id
+        val movie = dto.toDomain()
+        movieRepository.save(movie)
+        publisher.movieWasCreated(movie)
+        return movie.id
     }
 
     override fun update(dto: MovieUpdatingDto) {
         movieRepository.findById(dto.id).map {
             movieRepository.save(dto.toDomain())
+            publisher.movieWasUpdated(it)
         }.orElseThrow{ EntityNotFoundException() }
+
     }
 
     override fun retrieveById(id: UUID): MovieDescriptorDto {

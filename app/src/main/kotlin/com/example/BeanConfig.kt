@@ -7,9 +7,10 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class BeanConfig(
-    private val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository,
+    private val domainEvent: DomainEvent
 ) {
 
     @Bean
-    fun filmService(): MovieService = MovieServiceImpl(movieRepository)
+    fun filmService(): MovieService = MovieServiceImpl(movieRepository, domainEvent)
 }
