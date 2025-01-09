@@ -8,7 +8,12 @@ A good Domain Service has three characteristics:
 3. The operation is stateless.
 
 
-## Exemplo de Uso
+### Handling eventual consistency on use case application service with publisher domain event
+When it is necessary to have low inconsistency, consider using Outbox Pattern. Because adding @Transacional case an error in transactional commit, it will perform a rollback but still publish event.
+
+
+
+## Support
 
 Create a movie, send request HTTP `POST` for endpoint `/movies`:
 
@@ -23,3 +28,14 @@ curl -X POST http://localhost:8080/movies \
   "director": "Lana Wachowski, Lilly Wachowski",
   "casts": ["Keanu Reeves", "Carrie-Anne Moss", "Laurence Fishburne"]
 }'
+```
+
+Retrieve a movie, send request HTTP GET for endpoint /movies/{id}:
+
+```bash
+curl -X GET http://localhost:8080/movies/12345 \
+-H "Content-Type: application/json"
+```
+
+
+

@@ -4,6 +4,7 @@ import com.example.*
 import com.example.dtos.*
 import com.example.dtos.toDto
 import com.example.repositories.MovieRepository
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.validation.annotation.Validated
 import java.util.*
 
@@ -13,6 +14,7 @@ internal class MovieServiceImpl(
     private val publisher: DomainEvent
 ): MovieService {
 
+    @Transactional
     override fun create(dto: MovieCreationDto): UUID {
         val movie = dto.toDomain()
         movieRepository.save(movie)
@@ -20,6 +22,7 @@ internal class MovieServiceImpl(
         return movie.id
     }
 
+    @Transactional
     override fun update(dto: MovieUpdatingDto) {
         movieRepository.findById(dto.id).map {
             movieRepository.save(dto.toDomain())
