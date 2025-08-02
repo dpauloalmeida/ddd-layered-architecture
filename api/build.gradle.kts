@@ -14,4 +14,20 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
+    testImplementation("io.rest-assured:json-path:5.4.0")
+    testImplementation("io.rest-assured:xml-path:5.4.0")
+
+    constraints {
+        testImplementation("org.apache.groovy:groovy-xml:4.0.16")
+        testImplementation("org.apache.groovy:groovy:4.0.16")
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("org.apache.groovy:groovy:4.0.16")
+        force("org.apache.groovy:groovy-xml:4.0.16")
+    }
+    exclude(group = "org.codehaus.groovy")
 }
