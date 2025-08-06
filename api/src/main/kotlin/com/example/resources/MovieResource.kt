@@ -54,7 +54,7 @@ class MovieResource(
     }
 
     @GetMapping("/movies/by-director/{name}")
-    fun moviesByDirector(
+        fun moviesByDirector(
         @PathVariable name: String
     ): ResponseEntity<List<MovieDescriptorResponse>> {
 
